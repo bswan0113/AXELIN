@@ -1,4 +1,4 @@
-package com.korea.ai.koreaai;
+package com.axelin.ai.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

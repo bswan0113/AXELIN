@@ -1,10 +1,10 @@
-package com.korea.ai.koreaai;
+package com.axelin.ai;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class KoreaaiApplicationTests {
+class AxelinApplicationTests {
 
 	@Test
 	void contextLoads() {

@@ -1,13 +1,13 @@
-package com.korea.ai.koreaai;
+package com.axelin.ai;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class KoreaaiApplication {
+public class AxelinApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(KoreaaiApplication.class, args);
+		SpringApplication.run(AxelinApplication.class, args);
 	}
 
 }

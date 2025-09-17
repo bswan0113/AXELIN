@@ -8,11 +8,11 @@
 		<version>4.0.0-M2</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
-	<groupId>com.korea.ai</groupId>
-	<artifactId>koreaai</artifactId>
+	<groupId>com.axelin.ai</groupId>
+	<artifactId>axelin</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>koreaai</name>
+	<name>axelin</name>
 	<description>Demo project for Spring Boot</description>
 	<url/>
 	<licenses>
