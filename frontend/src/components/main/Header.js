@@ -45,7 +45,7 @@ function Header({ user }) {
             mx: 2
           }}
         >
-          <TextField
+          {/* <TextField
             variant="outlined"
             size="small"
             placeholder="어떤 AI가 필요하세요? 통합 검색"
@@ -57,7 +57,7 @@ function Header({ user }) {
                 } 
             }}
             sx={{ width: 'min(500px, 100%)' }}
-          />
+          /> */}
         </Box>
 
         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', ml: 3 }}>

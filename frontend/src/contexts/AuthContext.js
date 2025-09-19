@@ -1,12 +1,13 @@
-import React, { createContext, useContext } from 'react';
+// --- START OF FILE src/contexts/AuthContext.js ---
 
-// 1. 택배 회사를 설립합니다. (초기값은 null)
+import { createContext } from 'react';
+
+/**
+ * 전역 인증 상태를 제공하는 React Context입니다.
+ * Provider를 통해 user 객체를 하위 컴포넌트로 전달합니다.
+ */
 const AuthContext = createContext(null);
 
-// 2. 다른 컴포넌트에서 쉽게 택배를 받을 수 있도록 커스텀 훅을 만들어 줍니다. (강력 추천)
-export const useAuth = () => {
-  return useContext(AuthContext);
-};
-
-// 3. 택배 회사를 다른 파일에서 쓸 수 있도록 export 합니다.
 export default AuthContext;
+
+// --- END OF FILE src/contexts/AuthContext.js ---
