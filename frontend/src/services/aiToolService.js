@@ -209,6 +209,27 @@ export const fetchToolsByCategoryIds = async (categoryIds) => {
     return []; // 에러 발생 시 항상 빈 배열을 반환하여 앱의 안정성을 높입니다.
   }
 };
+// --- [신규 추가 또는 수정] 최신 AI 툴을 가져오는 함수 ---
+/**
+ * 전체 AI 툴 중 가장 최신에 등록된 순서대로 가져옵니다.
+ * (비로그인/온보딩 미완료 사용자를 위한 폴백 함수)
+ * @param {number} limit - 가져올 툴의 최대 개수
+ * @returns {Promise<Array>} - AI 툴 목록
+ */
+export const fetchPopularTools = async (limit = 10) => {
+  // 'created_at' 컬럼을 기준으로 내림차순(descending) 정렬하여 최신 항목이 위로 오게 합니다.
+  const { data, error } = await supabase
+    .from('ai_tools')
+    .select('*')
+    .order('created_at', { ascending: false }) // 최신순 정렬
+    .limit(limit);
 
+  if (error) {
+    console.error('Error fetching latest AI tools:', error.message);
+    throw error;
+  }
+
+  return data || [];
+};
 export default aiToolService;
 // --- END OF FILE src/services/aiToolService.js ---

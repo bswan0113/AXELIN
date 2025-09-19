@@ -2,15 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
-import OnboardingFlow from './features/onboarding/OnboardingFlow';
-import MainPage from './pages/MainPage';
-import LoginPage from './pages/LoginPage';
-import LoadingScreen from './components/common/LoadingScreen';
-import AuthContext from './contexts/AuthContext';
-import theme from './theme';
+import OnboardingFlow from 'features/onboarding/OnboardingFlow';
+import MainPage from 'pages/MainPage';
+import LoginPage from 'pages/LoginPage';
+import LoadingScreen from 'components/common/LoadingScreen';
+import AuthContext from 'contexts/AuthContext';
+import theme from 'theme';
 
-import { useAuth } from './hooks/useAuth';
-import { useInactivityLogout } from './hooks/useInactivityLogout';
+import { useAuth } from 'hooks/useAuth';
+import { useInactivityLogout } from 'hooks/useInactivityLogout';
 
 const ONBOARDING_COMPLETED_KEY = 'onboarding_flow_completed';
 

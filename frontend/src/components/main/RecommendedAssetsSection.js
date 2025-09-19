@@ -2,7 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import { Box, Typography, Card, CardMedia, CardContent, CircularProgress } from '@mui/material';
-import { fetchProductsByCategoryIds } from 'services/productService'; 
+import { fetchProductsByCategoryIds, fetchPopularProducts } from 'services/productService'; 
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline';
 
 // [핵심 수정 1] Swiper 관련 컴포넌트, 모듈, CSS를 import 합니다.
@@ -39,25 +39,55 @@ const RecommendedAssetsSection = ({ user, recommendedAssetTitle }) => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
+  const loadRecommendedAssets = async () => {
+    setIsLoading(true);
+    let categoryIdsToFetch = [];
+
+    // --- [핵심 수정] 데이터 로드 우선순위 로직 ---
+
+    // 우선순위 1: 로그인 사용자의 관심사 (user.interests 사용)
     if (user && user.interests && user.interests.length > 0) {
-      const loadRecommendedAssets = async () => {
-        setIsLoading(true);
+      console.log("로그인 사용자 관심사 기반으로 에셋 로드:", user.interests);
+      categoryIdsToFetch = user.interests;
+    } 
+    // 우선순위 2: 비로그인 사용자의 온보딩 선택지
+    else if (!user) {
+      const selectionsStr = localStorage.getItem('onboarding_selections');
+      if (selectionsStr) {
         try {
-          const assets = await fetchProductsByCategoryIds(user.interests);
-          setRecommendedAssets(assets.slice(0, 4));
-        } catch (error) {
-          console.error("추천 에셋을 불러오는 데 실패했습니다:", error);
-          setRecommendedAssets([]);
-        } finally {
-          setIsLoading(false);
+          const selections = JSON.parse(selectionsStr);
+          if (selections.subCategory && selections.subCategory.id) {
+            console.log("온보딩 선택지 기반으로 에셋 로드:", [selections.subCategory.id]);
+            categoryIdsToFetch = [selections.subCategory.id];
+          }
+        } catch (e) {
+          console.error("온보딩 선택지 파싱 오류:", e);
         }
-      };
-      loadRecommendedAssets();
-    } else {
-      setIsLoading(false);
-      setRecommendedAssets([]);
+      }
     }
-  }, [user]);
+
+    // --- API 호출 로직 ---
+    try {
+      let assets = [];
+      if (categoryIdsToFetch.length > 0) {
+        // 우선순위 1 또는 2에 해당하면 ID 기반으로 에셋을 가져옵니다.
+        assets = await fetchProductsByCategoryIds(categoryIdsToFetch);
+      } else {
+        // 우선순위 3 (폴백): 보여줄 ID가 없는 경우
+        console.log("폴백 로직 실행: 인기 에셋 로드");
+        assets = await fetchPopularProducts(); // 'fetchPopularProducts'는 예시 함수명입니다.
+      }
+      setRecommendedAssets(assets.slice(0, 4));
+    } catch (error) {
+      console.error("추천 에셋을 불러오는 데 실패했습니다:", error);
+      setRecommendedAssets([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  loadRecommendedAssets();
+}, [user]); 
 
   if (isLoading) {
     return (
