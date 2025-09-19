@@ -31,7 +31,7 @@ const HeroSection = ({ user }) => {
     if (isLoggedIn && userName) {
       return (
         <Typography variant="h3" component="h1" sx={{ fontWeight: 'bold', textAlign: 'center', mb: 1, color: '#333' }}>
-          <Box component="span" sx={{ background: gradientColor, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{userName}</Box>님을 위한 오늘의 AI 워크플로우
+          <Box component="span" sx={{ background: gradientColor, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>{userName}</Box>님을 위한 AI 워크플로우
         </Typography>
       );
     }
@@ -59,7 +59,7 @@ const HeroSection = ({ user }) => {
     <Box sx={{ my: 8, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
       {getHeadline()}
       {getHeadlineDescription()}
-      <SearchInput placeholder="어떤 도움이 필요하세요? (예: 블로그 글쓰기, 이미지 생성)" variant="outlined" />
+      {/* <SearchInput placeholder="어떤 도움이 필요하세요? (예: 블로그 글쓰기, 이미지 생성)" variant="outlined" /> */}
     </Box>
   );
 };

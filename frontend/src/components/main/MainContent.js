@@ -69,7 +69,8 @@ function MainContent() {
   }, [user, isLoggedIn]);
 
   // [수정] recommendedAssetsTitle 변수는 더 이상 사용하지 않으므로 삭제했습니다.
-  const recommendedToolsTitle = isLoggedIn ? `${user?.nickname || user?.name}님께 유용한 AI 툴 디렉토리` : '유용한 AI 툴 디렉토리';
+  const recommendedToolsTitle = isLoggedIn ? `께 유용한 AI 툴` : '유용한 AI 툴';
+  const recommendedAssetTitle = isLoggedIn ? `께 유용한 AI 에셋과 워크플로우` : '유용한 AI 에셋과 워크플로우';
   
   return (
     <Box sx={{ flexGrow: 1, py: 4, bgcolor: '#f9f9f9' }}>
@@ -79,9 +80,9 @@ function MainContent() {
         <Box sx={{ display: 'flex', flexDirection: 'column', gap: 8, mt: 8 }}>
           
           {/* [수정] title prop 대신 user 객체 자체를 넘겨줍니다. */}
-          <RecommendedAssetsSection user={user} userCategory={userCategory} />
+          <RecommendedAssetsSection recommendedAssetTitle={recommendedAssetTitle} user={user} userCategory={userCategory} />
           
-          <RecommendedToolsSection recommendedToolsTitle={recommendedToolsTitle} userCategory={userCategory} interestIds={interestIds} />
+          <RecommendedToolsSection recommendedToolsTitle={recommendedToolsTitle} user={user} userCategory={userCategory} interestIds={interestIds} />
           
           <Box>
             {/* <Typography variant="h4" sx={{ fontWeight: 'bold', mb: 3, color: '#333' }}>
