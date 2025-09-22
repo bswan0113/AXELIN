@@ -4,6 +4,7 @@ import BuyerMypage from './BuyerMypage';
 import SellerMypage from './SellerMypage';
 import MasterMypage from './MasterMypage';
 import AdminMypage from './AdminMypage';
+import UnAuthorizedPage from 'pages/UnAuthorizedPage';
 
 function Mypage() {
   const { user } = useContext(AuthContext);
@@ -23,7 +24,7 @@ function Mypage() {
     case 'ADMIN':
       return <AdminMypage />;
     default:
-      return <div>Unauthorized access or unknown role.</div>;
+      return <UnAuthorizedPage />
   }
 }
 
