@@ -16,7 +16,6 @@ import CurationSection from './CurationSection';
 function MainContent() {
   const navigate = useNavigate();
   const { user } = useContext(AuthContext);
-  console.log('MainContent에서 확인한 user 객체:', user);
   const isLoggedIn = !!user;
 
   const [userCategory, setUserCategory] = useState('인기');
@@ -69,8 +68,8 @@ function MainContent() {
   }, [user, isLoggedIn]);
 
   // [수정] recommendedAssetsTitle 변수는 더 이상 사용하지 않으므로 삭제했습니다.
-  const recommendedToolsTitle = isLoggedIn ? `께 유용한 AI 툴` : '유용한 AI 툴';
-  const recommendedAssetTitle = isLoggedIn ? `께 유용한 AI 에셋과 워크플로우` : '유용한 AI 에셋과 워크플로우';
+  const recommendedToolsTitle = isLoggedIn ? `님께 유용한 AI 툴` : '유용한 AI 툴';
+  const recommendedAssetTitle = isLoggedIn ? `님께 유용한 AI 에셋과 워크플로우` : '유용한 AI 에셋과 워크플로우';
   
   return (
     <Box sx={{ flexGrow: 1, py: 4, bgcolor: '#f9f9f9' }}>
@@ -103,11 +102,11 @@ function MainContent() {
           <CreatorCtaSection />
         </Box>
 
-        <Box sx={{ mt: 8, textAlign: 'center' }}>
+        {/* <Box sx={{ mt: 8, textAlign: 'center' }}>
           <Link onClick={() => navigate('/explore')} sx={{ fontSize: '1.1rem', fontWeight: 'bold', color: '#B46BFF', cursor: 'pointer', '&:hover': { textDecoration: 'underline' } }}>
             전체 카테고리 둘러보기
           </Link>
-        </Box>
+        </Box> */}
       </Container>
     </Box>
   );

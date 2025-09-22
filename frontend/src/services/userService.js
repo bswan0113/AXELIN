@@ -43,7 +43,7 @@ export const fetchUserProfile = async (session) => {
     const { data: profile, error } = await supabase
       .from('users')
       // [수정] select 쿼리에 'nickname'을 추가합니다.
-      .select(`id, name, email, avatar_url, nickname`)
+      .select(`id, name, email, avatar_url, nickname, role`)
       .eq('id', session.user.id)
       .single();
 
@@ -58,6 +58,7 @@ export const fetchUserProfile = async (session) => {
       email: session.user.email,
       name: session.user.user_metadata?.full_name || '사용자',
       avatar_url: session.user.user_metadata?.avatar_url,
+      role : 'BUYER', // 기본값 설정 (나중에 DB에서 덮어씌워질 예정)
     };
 
     if (profile) {
@@ -67,7 +68,8 @@ export const fetchUserProfile = async (session) => {
         name: profile.name || baseProfile.name, // DB에 이름이 없으면 세션 정보 사용
         avatar_url: profile.avatar_url,
         // [추가] nickname 필드를 추가합니다. DB에 값이 없으면(NULL) 기본값을 사용합니다.
-        nickname: profile.nickname || profile.name || '익명의 사용자', 
+        nickname: profile.nickname || profile.name || '익명의 사용자',
+        role: profile.role, // <-- Add this line
       };
       console.log('Fetched user profile from UserService:', transformedProfile);
       return transformedProfile;

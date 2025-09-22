@@ -38,7 +38,6 @@ const RecommendedToolsSection = ({user, recommendedToolsTitle, interestIds }) =>
       let categoryIdsToFetch = [];
 
       if (interestIds && interestIds.length > 0) {
-        console.log("로그인 사용자 관심사 기반으로 툴 로드:", interestIds);
         categoryIdsToFetch = interestIds;
       } 
       else if (!user) {
@@ -47,7 +46,6 @@ const RecommendedToolsSection = ({user, recommendedToolsTitle, interestIds }) =>
           try {
             const selections = JSON.parse(selectionsStr);
             if (selections.subCategory && selections.subCategory.id) {
-              console.log("온보딩 선택지 기반으로 툴 로드:", [selections.subCategory.id]);
               categoryIdsToFetch = [selections.subCategory.id];
             }
           } catch (e) {
@@ -90,7 +88,7 @@ const RecommendedToolsSection = ({user, recommendedToolsTitle, interestIds }) =>
         {displayName ? (
           <>
             <Box component="span" sx={{ background: gradientColor, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              {`${displayName}님`}
+              {`${displayName}`}
             </Box>
             {` ${recommendedToolsTitle}`}
           </>

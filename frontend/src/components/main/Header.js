@@ -62,28 +62,57 @@ function Header({ user }) {
 
         <Box sx={{ flexGrow: 0, display: 'flex', alignItems: 'center', ml: 3 }}>
           { user ? (
-            <Button 
-              variant="contained" 
-              onClick={handleLogout}
-              sx={{
-                background: '#666',
-                color: 'white',
-                fontWeight: 'medium',
-                borderRadius: '8px',
-                padding: '8px 16px',
-                textTransform: 'none',
-                boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
-                transition: 'all 0.3s ease-in-out',
-                '&:hover': {
-                  background: '#555',
-                  boxShadow: '0 6px 15px rgba(0,0,0,0.3)',
-                  transform: 'translateY(-1px)',
-                },
-              }}
-            >
-              로그아웃
-            </Button>
+            // [핵심 수정] 로그인 상태일 때 '마이페이지'와 '로그아웃' 버튼 두 개를 보여줍니다.
+            <>
+              <Button 
+                variant="contained" 
+                onClick={() => navigate('/mypage')} // '/mypage' 경로로 이동
+                sx={{
+                  // 로그인 버튼과 동일한 디자인 적용
+                  background: gradientColor,
+                  color: 'white',
+                  fontWeight: 'medium',
+                  borderRadius: '8px',
+                  padding: '8px 16px',
+                  textTransform: 'none',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+                  transition: 'all 0.3s ease-in-out',
+                  mr: 2, // 로그아웃 버튼과의 간격을 위해 오른쪽 마진 추가
+                  '&:hover': {
+                    background: hoverGradientColor,
+                    boxShadow: '0 6px 15px rgba(0,0,0,0.3)',
+                    transform: 'translateY(-1px)',
+                  },
+                }}
+              >
+                마이페이지
+              </Button>
+              
+              <Button 
+                variant="contained" 
+                onClick={handleLogout}
+                sx={{
+                  // 기존 로그아웃 버튼 스타일은 그대로 유지
+                  background: '#666',
+                  color: 'white',
+                  fontWeight: 'medium',
+                  borderRadius: '8px',
+                  padding: '8px 16px',
+                  textTransform: 'none',
+                  boxShadow: '0 4px 10px rgba(0,0,0,0.2)',
+                  transition: 'all 0.3s ease-in-out',
+                  '&:hover': {
+                    background: '#555',
+                    boxShadow: '0 6px 15px rgba(0,0,0,0.3)',
+                    transform: 'translateY(-1px)',
+                  },
+                }}
+              >
+                로그아웃
+              </Button>
+            </>
           ) : (
+            // 비로그인 상태는 기존과 동일하게 '로그인' 버튼만 보여줍니다.
             <Button 
               variant="contained" 
               onClick={() => navigate('/login')}

@@ -3,14 +3,20 @@ import { Routes, Route, Navigate } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 
 import OnboardingFlow from 'features/onboarding/OnboardingFlow';
+
 import MainPage from 'pages/MainPage';
 import LoginPage from 'pages/LoginPage';
+import ProductDetailPage from 'pages/ProductDetailPage';
+import MyPage from 'pages/Mypage/Mypage';
+
 import LoadingScreen from 'components/common/LoadingScreen';
+import PopupManager from 'components/common/PopupManager';
 import AuthContext from 'contexts/AuthContext';
 import theme from 'theme';
 
 import { useAuth } from 'hooks/useAuth';
 import { useInactivityLogout } from 'hooks/useInactivityLogout';
+import { PopupProvider } from 'contexts/PopupContext';
 
 const ONBOARDING_COMPLETED_KEY = 'onboarding_flow_completed';
 
@@ -24,16 +30,19 @@ const MainApp = () => {
 
   // useAuth가 사용자 정보를 로딩하는 동안 로딩 화면을 보여줍니다.
   // 이 부분이 없으면 useAuth의 user가 null인 초기 상태에서 OnboardingFlow로 잘못 빠질 수 있습니다.
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+  // if (isLoading) {
+  //   return <LoadingScreen />;
+  // }
 
   return (
     <AuthContext.Provider value={{ user }}>
       <Routes>
         <Route path="/login" element={<LoginPage />} />
         <Route path="/*" element={<MainPage />} />
+        <Route path="/product/:productId" element={<ProductDetailPage />} />
+        <Route path="/mypage" element={<MyPage />} />
       </Routes>
+      <PopupManager />
     </AuthContext.Provider>
   );
 };
@@ -58,7 +67,9 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
-      {showOnboarding ? <OnboardingFlow /> : <MainApp />}
+      <PopupProvider>
+        {showOnboarding ? <OnboardingFlow /> : <MainApp />}
+      </PopupProvider>
     </ThemeProvider>
   );
 }

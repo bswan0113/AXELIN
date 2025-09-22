@@ -27,11 +27,11 @@ export const useAuth = () => {
         await userInterestService.setUserInterests(session.user.id, uniqueInterestIds);
       }
 
-      // 3. users 테이블에 onboarding_completed = true로 업데이트
-      await supabase
-        .from('users')
-        .update({ onboarding_completed: true })
-        .eq('id', session.user.id);
+      // // 3. users 테이블에 onboarding_completed = true로 업데이트
+      // await supabase
+      //   .from('users')
+      //   .update({ onboarding_completed: true })
+      //   .eq('id', session.user.id);
       
       console.log('%c[useAuth] Onboarding setup successful.', 'color: green;');
     } catch (error) {

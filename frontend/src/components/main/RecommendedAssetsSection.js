@@ -11,7 +11,7 @@ import { Navigation, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
-
+import { useParams, Link as RouterLink } from 'react-router-dom';
 const gradientColor = 'linear-gradient(to right, #FFAABF, #D6ADFF, #A3B9FF)';
 
 // [핵심 수정 2] Swiper 네비게이션/페이지네이션 버튼의 스타일을 지정합니다.
@@ -103,7 +103,7 @@ const RecommendedAssetsSection = ({ user, recommendedAssetTitle }) => {
         {displayName ? (
           <>
             <Box component="span" sx={{ background: gradientColor, WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent' }}>
-              {`${displayName}님`}
+              {`${displayName}`}
             </Box>
             {` ${recommendedAssetTitle}`}
           </>
@@ -147,6 +147,7 @@ const RecommendedAssetsSection = ({ user, recommendedAssetTitle }) => {
             {recommendedAssets.map((asset) => (
               // [핵심 수정 5] Grid item 대신 SwiperSlide를 사용합니다.
               <SwiperSlide key={asset.id} style={{ height: 'auto' }}>
+                <RouterLink to={`/product/${asset.id}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
                 <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column', boxShadow: '0px 4px 15px rgba(0,0,0,0.05)', borderRadius: '12px', transition: 'transform 0.2s', '&:hover': { transform: 'translateY(-5px)' } }}>
                   <CardMedia
                     component="img"
@@ -186,6 +187,7 @@ const RecommendedAssetsSection = ({ user, recommendedAssetTitle }) => {
                     </Typography>
                   </CardContent>
                 </Card>
+                </RouterLink>
               </SwiperSlide>
             ))}
           </Swiper>
